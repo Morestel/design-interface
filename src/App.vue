@@ -5,15 +5,16 @@ import ProfilePictureVue from './components/ProfilePicture.vue';
 import MonthDateVue from './components/MonthDate.vue';
 import TaskCardVue from './components/TaskCard.vue';
 import TaskCard from './components/TaskCard.vue';
+
+
 </script>
 
 <template>
   <header>
-    <ProfilePictureVue avatar="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" />
+    <ProfilePictureVue :avatar="data.avatar_url" />
   </header>
-
   <main>
-    <MonthDateVue />
+    <MonthDateVue @changeDate="changeDate($event)" />
     <svg id="svgBlock" width="100%" height="1500px">
 
       <foreignObject v-for="h in hours" :key="h.t" v-bind:x="h.x" v-bind:y="h.y" v-bind:width="h.w" v-bind:height="h.h">
@@ -21,7 +22,7 @@ import TaskCard from './components/TaskCard.vue';
         </foreignObject>
      
 
-      <TaskCard v-for="item in listItem" :key="item" :item="item"/>
+      <TaskCard v-for="task in this.listItem" :key="task" :item="task"/>
     </svg>
     
   </main>
@@ -53,11 +54,39 @@ export default{
                     { t: "21:00", x: "0", y: "1320", w: "12.5%", h: "60px" },
                     { t: "22:00", x: "0", y: "1380", w: "12.5%", h: "60px" },
                     { t: "23:00", x: "0", y: "1440", w: "12.5%", h: "60px" },],
-        listItem: [{"id":1,"date":"12/02/2022","start-time":"09:00","end-time":"10:00","title":"Mobile app design","members":[{"name":"Mike","avatar_url":"https://reqres.in/img/faces/3-image.jpg",},
-{"name":"Anita","avatar_url":"https://reqres.in/img/faces/3-image.jpg",},]}],
+        data: [],
+        listItem :[],
+        date: new Date(), // When the user arrives, the date is the date of the current date but he can change it from MonthDate component  
     }),
+
+    created(){
+      this.loadData();
+    },
+
     methods:{
-        
+       
+        async loadData(){
+          let url = 'http://localhost:3000/data.json'
+          let res = await fetch(url)
+          this.data = await res.json() // We put our data in an object data
+
+          // Now we put all the tasks of the day in a list
+          for (let i in this.data.tasks){
+            if (this.data.tasks[i].date == this.date.toLocaleDateString('fr')){
+              this.listItem.push(this.data.tasks[i])
+            }
+          }
+        },
+
+        changeDate(event){
+          this.date = event
+          this.listItem = []
+          for (let i in this.data.tasks){
+            if (this.data.tasks[i].date == this.date.toLocaleDateString('fr')){ // The date are in the french format in the JSON file
+              this.listItem.push(this.data.tasks[i])
+            }
+          }
+        },
     }
 }
 
