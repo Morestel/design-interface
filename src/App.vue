@@ -1,19 +1,18 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import ProfilePictureVue from './components/ProfilePicture.vue';
+import MonthDateVue from './components/MonthDate.vue';
+import TaskCardVue from './components/TaskCard.vue';
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+    <ProfilePictureVue avatar="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" />
   </header>
 
   <main>
-    <TheWelcome />
+    <MonthDateVue />
   </main>
 </template>
 
