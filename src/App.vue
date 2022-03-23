@@ -1,18 +1,17 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+
 import ProfilePictureVue from './components/ProfilePicture.vue';
 import MonthDateVue from './components/MonthDate.vue';
-import TaskCardVue from './components/TaskCard.vue';
 import TaskCard from './components/TaskCard.vue';
 
 
 </script>
 
 <template>
-  <div class="block">
-  <ProfilePictureVue :avatar="data.avatar_url" />
-  </div>
+  <header>
+    <ProfilePictureVue :avatar="data.avatar_url" />
+  </header>
+    
   <main>
     <MonthDateVue @changeDate="changeDate($event)" />
     <svg id="svgBlock" width="100%" height="1500px">
@@ -97,14 +96,64 @@ export default{
 @charset "utf-8";
 
 $background-color: #171923;
+$font-color: white;
 $primary-color:red;
 $purple: #8A4D76;
+$background-selected: #6caaaa;
 
 $primary:$purple;
 
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+  min-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  color: white;
+}
+
 body{
-   margin: 0;
+  margin: 0;
   background-color: $background-color;
+}
+
+header{
+  height:150px;
+}
+
+main{
+  position: relative;
+  top:20%;
+}
+
+::-webkit-scrollbar{
+    height: 8px;
+    width: 8px;
+}
+
+.avatar {
+  position: absolute;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10px;
+}
+
+.avatar:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.selected-day{
+  background-color: $background-selected;
+}
+
+.selected-month{
+  color:#6caaaa;
 }
  
 

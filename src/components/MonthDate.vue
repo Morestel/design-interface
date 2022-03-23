@@ -1,12 +1,23 @@
 <template>
 <div class="block">
-    <span @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> {{ month }} <span  @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span>
+    <div class="block has-text-centered">
+        <span @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> <span class="content is-medium selected-month">{{ month }}</span> <span  @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span>
+    </div>
 
-    <ul>
-        <li v-for="day in this.days" :key="day">
-            <button class="button is-primary" @click="changeDate(day, 'day')">{{ day }} {{ dayOfWeek(day) }}</button>
-        </li>
-    </ul>
+    <div class="tabs is-centered">
+        <ul>
+            <li v-for="day in this.days" :key="day">
+                <div v-if="day == this.date.getDate()">
+                    <a class="selected-day" @click="changeDate(day, 'day')">{{ day }} <br>{{ dayOfWeek(day) }}</a>
+                </div>
+                <div v-else>
+                    <a @click="changeDate(day, 'day')">{{ day }} <br>{{ dayOfWeek(day) }}</a>
+                </div>
+                
+            </li>
+        </ul>
+    </div>
+    
 </div>
 </template>
 
@@ -52,6 +63,7 @@ export default{
             switch(type){
                 case "day":
                     this.date.setDate(toChange);
+                    console.log(this.date.getDate())
                     break;
                 case "month":
                     var month = ''
@@ -67,6 +79,7 @@ export default{
                 default:
                     break;
             }
+            this.$forceUpdate() // ? Maybe not the good way to proceed to update the render
             
             this.$emit('changeDate', this.date)
         },
