@@ -13,6 +13,7 @@ defineProps({
         <ul>
             <li v-for="member in item.members" :key="member">{{ member.name }} <img :src="member.avatar_url" alt="Profile picture" /></li>
         </ul>
+        <div>{{ item["start-time"] }} {{ item["end-time"] }}</div>
     </foreignObject>
 </template>
 
