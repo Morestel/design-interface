@@ -10,6 +10,8 @@ defineProps({
 
 <template>
 
-    <img :src="avatar" alt="Profile Picture" />
+    <div class="image is-128x128 avatar">
+      <img class="is-rounded" :src="avatar" alt="Profile Picture" />
+    </div>
 
 </template>
