@@ -10,6 +10,9 @@ defineProps({
 <template>
     <foreignObject :x="100" :y="svgY(item)" width="40%" :height="svgHeight(item)">
         <div>{{item.title}}</div>
+        <ul>
+            <li v-for="member in item.members" :key="member">{{ member.name }} <img :src="member.avatar_url" alt="Profile picture" /></li>
+        </ul>
     </foreignObject>
 </template>
 
