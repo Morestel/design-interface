@@ -4,7 +4,7 @@
 
 <ul>
     <li v-for="day in this.days" :key="day">
-        <button @click="changeDate(day, 'day')">{{ day }}</button>
+        <button @click="changeDate(day, 'day')">{{ day }} {{ dayOfWeek(day) }}</button>
     </li>
 </ul>
 </template>
@@ -17,8 +17,8 @@ export default{
         nextMonth:'',
         previousMonth:'',
         days: [],
-        monthInYear: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
+        monthInYear: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        dayInWeek: ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."]
     }),
 
     emits:['changeDate']
@@ -39,6 +39,7 @@ export default{
 
         getDaysInMonth: function(month, year) {
             var date = new Date(year, month, 1);
+            this.days = []
             // We count the number of days in the month
             while (date.getMonth() === month) {
                 this.days.push(new Date(date).getDate());
@@ -60,12 +61,18 @@ export default{
                     }
                     this.date.setMonth(month)
                     this.extractDate() // Once the month is changed, we extract once again the date in view of updating the visual
+                    this.getDaysInMonth(month, this.date.getFullYear()) // And we update the day of the month too
                     break;
                 default:
                     break;
             }
             
             this.$emit('changeDate', this.date)
+        },
+
+        dayOfWeek: function(day){ // Given a day we want to return the day of week
+            let dayWeek = new Date(this.date.getFullYear(), this.date.getMonth(), day)
+            return this.dayInWeek[dayWeek.getDay()]
         }
     }
 }
