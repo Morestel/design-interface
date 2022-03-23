@@ -1,12 +1,13 @@
 <template>
-    
-<span @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> {{ month }} <span  @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span>
+<div class="block">
+    <span @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> {{ month }} <span  @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span>
 
-<ul>
-    <li v-for="day in this.days" :key="day">
-        <button @click="changeDate(day, 'day')">{{ day }} {{ dayOfWeek(day) }}</button>
-    </li>
-</ul>
+    <ul>
+        <li v-for="day in this.days" :key="day">
+            <button class="button is-primary" @click="changeDate(day, 'day')">{{ day }} {{ dayOfWeek(day) }}</button>
+        </li>
+    </ul>
+</div>
 </template>
 
 <script>
