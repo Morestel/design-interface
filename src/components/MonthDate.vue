@@ -1,7 +1,12 @@
 <template>
 <div class="block">
     <div class="block has-text-centered">
-        <span @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> <span class="content is-medium selected-month">{{ month }}</span> <span  @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span>
+        <div><span @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> <span class="content is-medium selected-month">{{ month }}</span> <span  @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span></div>
+        <div class="select is-small is-rounded selected-year">
+            <select v-model="year" class="is-hovered" @click="changeDate($event, 'year')">
+                <option v-for="y in years" :key="y">{{ y }}</option>
+            </select>
+        </div>
     </div>
 
     <div class="tabs is-centered">
@@ -30,7 +35,9 @@ export default{
         previousMonth:'',
         days: [],
         monthInYear: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        dayInWeek: ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."]
+        dayInWeek: ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."],
+        year: new Date().getFullYear(),
+        years: [],
     }),
 
     emits:['changeDate']
@@ -47,6 +54,9 @@ export default{
             this.month = this.monthInYear[this.date.getMonth()]
             this.previousMonth = (this.date.getMonth() == 0 ? this.monthInYear[11] : this.monthInYear[this.date.getMonth() - 1])
             this.nextMonth = (this.date.getMonth() == 11 ? this.monthInYear[0] : this.monthInYear[this.date.getMonth() + 1])
+            for (let i = 2017; i < 2100; i++){
+                this.years.push(i)
+            }
         },
 
         getDaysInMonth: function(month, year) {
@@ -72,9 +82,23 @@ export default{
                             month = i
                         }
                     }
+                    // We update the year if needed
+                    if (this.date.getMonth() == 0 && month == 11){
+                        this.year--;
+                        this.date.setFullYear(this.year);
+                    }
+                    if (this.date.getMonth() == 11 && month == 0){
+                        this.year++;
+                        this.date.setFullYear(this.year);
+                    }
                     this.date.setMonth(month)
                     this.extractDate() // Once the month is changed, we extract once again the date in view of updating the visual
                     this.getDaysInMonth(month, this.date.getFullYear()) // And we update the day of the month too
+                    break;
+
+                case "year":
+                    this.date.setFullYear(toChange.target.value);
+                    this.getDaysInMonth(this.date.getMonth(), this.date.getFullYear());
                     break;
                 default:
                     break;

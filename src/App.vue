@@ -16,7 +16,7 @@ import TaskCard from './components/TaskCard.vue';
     <MonthDateVue @changeDate="changeDate($event)" />
     <svg id="svgBlock" width="100%" height="1500px">
 
-      <foreignObject v-for="h in hours" :key="h.t" v-bind:x="h.x" v-bind:y="h.y" v-bind:width="h.w" v-bind:height="h.h">
+      <foreignObject v-for="h in hours" :key="h.t" v-bind:x="h.x" v-bind:y="h.y" v-bind:width="h.w" v-bind:height="h.h" class="hour">
             <div>{{h.t}}</div>
         </foreignObject>
      
@@ -58,8 +58,17 @@ export default{
         date: new Date(), // When the user arrives, the date is the date of the current date but he can change it from MonthDate component  
     }),
 
-    created(){
+    mounted(){
       this.loadData();
+    },
+
+    updated(){
+       // We update the theme color depending of the json file
+        try{
+          document.documentElement.style.setProperty("--themeColor", this.data.primary_color)
+        }catch(e){ // If an error happen we choose a color by default
+          document.documentElement.style.setProperty("--themeColor", "#6caaaa")
+        }
     },
 
     methods:{
@@ -102,6 +111,10 @@ $purple: #8A4D76;
 $background-selected: #6caaaa;
 
 $primary:$purple;
+
+:root {
+  --themeColor: $background-selected;
+}
 
 * {
   margin: 0px;
@@ -149,13 +162,42 @@ main{
 }
 
 .selected-day{
-  background-color: $background-selected;
+  background-color: var(--themeColor);
 }
 
 .selected-month{
-  color:#6caaaa;
+  color:var(--themeColor);
 }
- 
+
+svg .hour div {
+  width: 100%;
+  height: 100%;
+  font-size: 1.2vw;
+  text-align: center;
+  transition: background-color 0.2s;
+  margin: 1px;
+  box-sizing: border-box;
+}
+
+svg .item{
+  width: 100%;
+  background-color: var(--themeColor);
+  text-align: center;
+  transition: background-color 0.2s;
+  overflow: auto;
+  padding: 1px;
+  box-sizing: border-box;
+  border: solid 1px rgba(255, 255, 255, 0.4);
+  border-radius: 5%;
+}
+
+svg .item:hover {
+  background-color: blue;
+}
+
+svg .item{
+  border: 1px solid red;
+}
 
 @import "../node_modules/bulma/bulma.sass";
 
