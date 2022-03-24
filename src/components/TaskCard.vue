@@ -8,11 +8,13 @@ defineProps({
 </script>
 
 <template>
-    <foreignObject :x="100" :y="svgY(item)" width="40%" :height="svgHeight(item)">
+    <foreignObject :x="100" :y="svgY(item)" width="40%" :height="svgHeight(item)" class="item">
         <div>{{item.title}}</div>
-        <ul>
-            <li v-for="member in item.members" :key="member">{{ member.name }} <img :src="member.avatar_url" alt="Profile picture" /></li>
-        </ul>
+        <div>
+            <ul>
+                <li class="image is-32x32" v-for="member in item.members" :key="member">{{ member.name }} <img class="is-rounded" :src="member.avatar_url" alt="Profile picture" /></li>
+            </ul>
+        </div>
         <div>{{ item["start-time"] }} {{ item["end-time"] }}</div>
     </foreignObject>
 </template>
@@ -42,10 +44,12 @@ export default{
 
             let hourEnd = item["end-time"].slice(0, 2);
             let minutesEnd = item["end-time"].slice(3, 5);
+
             // Starting by convert hour in minutes then we add the minutes
-            let timeHourBegin = hourBegin * 60 + minutesBegin; // 600 
-            let timeHourEnd = hourEnd * 60 + minutesEnd;  // 720
-            // Then we do the difference between them and we return it
+            let timeHourBegin = hourBegin * 60 + minutesBegin * 1; // 600 
+            let timeHourEnd = hourEnd * 60 + minutesEnd * 1;  // 720
+
+// Then we do the difference between them and we return it
             return "" + timeHourEnd - timeHourBegin;
         },
 
