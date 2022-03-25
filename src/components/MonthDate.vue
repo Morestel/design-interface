@@ -34,7 +34,7 @@
 <script>
 export default{
     data: () => ({
-        date: new Date(),
+        date: new Date(2022, 2, 22),
         month: '',
         nextMonth:'',
         previousMonth:'',

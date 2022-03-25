@@ -61,7 +61,7 @@ export default{
                     { t: "23:00", x: "0", y: "1380", w: "12.5%", h: "60px" },],
         data: [],
         listItem :[],
-        date: new Date(), // When the user arrives, the date is the date of the current date but he can change it from MonthDate component  
+        date: new Date(2022, 2, 22), // When the user arrives, the date is the date of the current date but he can change it from MonthDate component  
         inCommon: [],
         timeLine: 0,
     }),
@@ -127,7 +127,6 @@ export default{
 @charset "utf-8";
 
 $background-color: #171923;
-$background-selected: #6caaaa;
 
 // Themes of the body
 $body-background-color: $background-color;
