@@ -1,13 +1,3 @@
-<script setup>
-defineProps({
-  avatar: {
-    type: String,
-    required: true
-  }
-})
-</script>
-
-
 <template>
 
     <div class="image is-128x128 avatar">
@@ -15,3 +5,10 @@ defineProps({
     </div>
 
 </template>
+
+<script>
+export default {
+  props:["avatar"]
+
+}
+</script>
