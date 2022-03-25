@@ -25,17 +25,9 @@
 
 <script>
 export default{
-    data: () => ({
-        
-    }),
-
     props:{
         inCommon: Object
     },    
-
-    methods:{
-
-    }
 }
 
 

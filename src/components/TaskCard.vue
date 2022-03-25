@@ -42,7 +42,7 @@ export default{
         svgY: function (item) { // In function of the start of the item
             let hour = item["start-time"].slice(0, 2);
             let minutes = item["start-time"].slice(3, 5);
-            return "" + (60 + (hour * 60) + minutes * 1);
+            return "" + ((hour * 60) + minutes * 1);
         },
 
         svgHeight: function (item) {
@@ -62,8 +62,7 @@ export default{
         },
 
         changeCommon: function (members) {
-            console.log("Membre : " + members)
-            this.$emit('changeCommon', members)
+            this.$emit('changeCommon', members) // Change the people who are in the box
         }
 
     }
