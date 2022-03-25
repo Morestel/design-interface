@@ -15,7 +15,7 @@ import Common from './components/Common.vue';
     
   <main>
     <MonthDateVue @changeDate="changeDate($event)" />
-    <svg id="svgBlock" width="70%" height="1500px">
+    <svg id="svgBlock" width="70%" height="1440px">
 
       <foreignObject v-for="h in hours" :key="h.t" v-bind:x="h.x" v-bind:y="h.y" v-bind:width="h.w" v-bind:height="h.h" class="hour">
             <div>{{h.t}}</div>
@@ -166,18 +166,6 @@ main{
     width: 8px;
 }
 
-.avatar {
-  display: block;
-  margin: auto;
-  top: 10px;
-  transition : opacity 0.5s;
-}
-
-.avatar:hover {
-  opacity: 0.7;
-  cursor: pointer;
-}
-
 .selected-day{
   background-color: var(--themeColor);
 }
@@ -205,57 +193,6 @@ svg .hour div {
   text-align: center;
   margin: 1px;
   box-sizing: border-box;
-}
-
-.month-date{
-  margin-top:1%;
-}
-
-.actual-month, .previous-month, .next-month{
-  user-select: none;
-  display: inline-block;
-  width:30%;
-  height:5%;
-}
-
-.previous-month{
-  text-align: left;
-}
-
-.next-month{
-  text-align: right;
-}
-
-.item{
-  position: relative;
-  width:70%;
-  background-color: var(--themeColor);
-  text-align: center;
-  overflow: auto;
-  box-sizing: border-box;
-  border: solid 1px rgba(255, 255, 255, 0.4);
-  border-radius: 5%;
-}
-
-.common-block{
-  margin-right: 40px;
-  float:right;
-  width:25%;
-}
-
-.card-content .content ul{
-  list-style: none;
-}
-
-.member span{
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-}
-
-.common-icon:hover{
-  cursor: pointer;
-  opacity: 0.5;
 }
 
 #time-actual{

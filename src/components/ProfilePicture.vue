@@ -12,3 +12,19 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+
+.avatar {
+  display: block;
+  margin: auto;
+  top: 10px;
+  transition : opacity 0.5s;
+}
+
+.avatar:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+</style>

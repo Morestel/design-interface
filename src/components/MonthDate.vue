@@ -122,3 +122,25 @@ export default{
 
 </script>
 
+<style lang="scss">
+
+.month-date{
+  margin-top:1%;
+}
+
+.actual-month, .previous-month, .next-month{
+  user-select: none;
+  display: inline-block;
+  width:30%;
+  height:5%;
+}
+
+.previous-month{
+  text-align: left;
+}
+
+.next-month{
+  text-align: right;
+}
+
+</style>

@@ -33,3 +33,32 @@ export default{
 
 </script>
 
+<style lang="scss">
+
+@media screen and(max-width: 1280px) {
+  .common-block {
+    visibility: hidden;
+  }
+}
+
+.common-block{
+  margin-right: 40px;
+  float:right;
+  width:25%;
+}
+
+.card-content .content ul{
+  list-style: none;
+}
+
+.member span{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.common-icon:hover{
+  cursor: pointer;
+  opacity: 0.5;
+}
+</style>

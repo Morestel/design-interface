@@ -67,3 +67,17 @@ export default{
 
 </script>
 
+<style lang="scss">
+
+.item{
+  position: relative;
+  width:70%;
+  background-color: var(--themeColor);
+  text-align: center;
+  overflow: auto;
+  box-sizing: border-box;
+  border: solid 1px rgba(255, 255, 255, 0.4);
+  border-radius: 5%;
+}
+
+</style>
