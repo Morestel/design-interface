@@ -8,15 +8,21 @@ defineProps({
 </script>
 
 <template>
-    <foreignObject :x="100" :y="svgY(item)" width="40%" :height="svgHeight(item)" class="item">
-        <div>{{item.title}}</div>
-        <div>
-            <ul>
-                <li class="image is-32x32" v-for="member in item.members" :key="member">{{ member.name }} <img class="is-rounded" :src="member.avatar_url" alt="Profile picture" /></li>
-            </ul>
-        </div>
-        <div>{{ item["start-time"] }} {{ item["end-time"] }}</div>
-    </foreignObject>
+    
+        <foreignObject x="12.5%" :y="svgY(item)" width="40%" :height="svgHeight(item)" class="box item" @click="changeCommon(item.members)">
+            <div>{{item.title}}</div>
+            <div class="timer-item">{{ item["start-time"] }} {{ item["end-time"] }}</div>
+            <div class="breadcrumb has-dot-separator">
+                
+                <ul>
+                    <span>Members : &nbsp;</span>
+                    <li v-for="member in item.members" :key="member">
+                        <span class="image is-32x32"><img class="is-rounded" :src="member.avatar_url" alt="Profile picture" :title="member.name"></span>
+                    </li>
+                </ul>
+            </div>
+            
+        </foreignObject>
 </template>
 
 <script>
@@ -24,6 +30,8 @@ export default{
     data: () => ({
         
     }),
+
+    emits:['changeCommon'],
 
     mounted(){
         console.log(this.item)
@@ -49,9 +57,14 @@ export default{
             let timeHourBegin = hourBegin * 60 + minutesBegin * 1; // 600 
             let timeHourEnd = hourEnd * 60 + minutesEnd * 1;  // 720
 
-// Then we do the difference between them and we return it
+            // Then we do the difference between them and we return it
             return "" + timeHourEnd - timeHourBegin;
         },
+
+        changeCommon: function (members) {
+            console.log("Membre : " + members)
+            this.$emit('changeCommon', members)
+        }
 
     }
 }
