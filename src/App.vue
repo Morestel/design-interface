@@ -19,7 +19,7 @@ import Common from './components/Common.vue';
 
       <foreignObject v-for="h in hours" :key="h.t" v-bind:x="h.x" v-bind:y="h.y" v-bind:width="h.w" v-bind:height="h.h" class="hour">
             <div>{{h.t}}</div>
-        </foreignObject>
+      </foreignObject>
      
 
       <TaskCard v-for="task in this.listItem" :key="task" :item="task" @changeCommon="changeCommon($event)"/>
@@ -138,10 +138,6 @@ html {
   overflow-x:hidden;
 }
 
-body{
-
-}
-
 header{
   width: 100%;
   height:20%;
@@ -228,6 +224,26 @@ svg .hour div {
   border-radius: 5%;
 }
 
+.common-block{
+  margin-right: 40px;
+  float:right;
+  width:25%;
+}
+
+.card-content .content ul{
+  list-style: none;
+}
+
+.member span{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.common-icon:hover{
+  cursor: pointer;
+  opacity: 0.5;
+}
 
 
 
