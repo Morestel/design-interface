@@ -3,6 +3,7 @@
 import ProfilePictureVue from './components/ProfilePicture.vue';
 import MonthDateVue from './components/MonthDate.vue';
 import TaskCard from './components/TaskCard.vue';
+import Common from './components/Common.vue';
 
 
 </script>
@@ -14,15 +15,17 @@ import TaskCard from './components/TaskCard.vue';
     
   <main>
     <MonthDateVue @changeDate="changeDate($event)" />
-    <svg id="svgBlock" width="100%" height="1440px">
+    <svg id="svgBlock"  width="70%" height="1500px">
 
       <foreignObject v-for="h in hours" :key="h.t" v-bind:x="h.x" v-bind:y="h.y" v-bind:width="h.w" v-bind:height="h.h" class="hour">
             <div>{{h.t}}</div>
         </foreignObject>
      
 
-      <TaskCard v-for="task in this.listItem" :key="task" :item="task"/>
+      <TaskCard v-for="task in this.listItem" :key="task" :item="task" @changeCommon="changeCommon($event)"/>
     </svg>
+    
+    <Common :inCommon="inCommon" />
     
   </main>
 </template>
@@ -56,6 +59,7 @@ export default{
         data: [],
         listItem :[],
         date: new Date(), // When the user arrives, the date is the date of the current date but he can change it from MonthDate component  
+        inCommon: [],
     }),
 
     mounted(){
@@ -96,6 +100,10 @@ export default{
           }
         },
 
+        changeCommon(event){ // We change the people who are in the common list
+          this.inCommon = event
+        }
+
     }
 }
 
@@ -106,13 +114,9 @@ export default{
 @charset "utf-8";
 
 $background-color: #171923;
-$font-color: white;
-$primary-color:red;
-$purple: #8A4D76;
 $background-selected: #6caaaa;
 
-$primary:$purple;
-
+// Themes of the body
 $body-background-color: $background-color;
 $body-color: #E7E8F2;
 
@@ -120,7 +124,10 @@ $body-color: #E7E8F2;
   --themeColor: $background-selected;
 }
 
+// Themes of the box (For the item)
 $box-background-color: var(--themeColor);
+$box-color: #E7E8F2;
+$box-padding: 1px;
 
 * {
   margin: 0px;
@@ -170,26 +177,25 @@ main{
   color:var(--themeColor) !important;
 }
 
+#svgBlock{
+  background-image: url(./assets/scheduleWall.png);
+  background-repeat: repeat;
+  background-size: 12.5% 60px;
+}
+
+@media screen and (max-width: 1280px) {
+  svg {
+    width:100%;
+  }
+}
+
 svg .hour div {
   width: 100%;
   height: 100%;
-  font-size: 1.2vw;
+  font-size: 16px;
   text-align: center;
-  transition: background-color 0.2s;
   margin: 1px;
   box-sizing: border-box;
-}
-
-svg .item{
-  width: 100%;
-  background-color: var(--themeColor);
-  text-align: center;
-  transition: background-color 0.2s;
-  overflow: auto;
-  padding: 1px;
-  box-sizing: border-box;
-  border: solid 1px rgba(255, 255, 255, 0.4);
-  border-radius: 5%;
 }
 
 .month-date{
@@ -210,6 +216,20 @@ svg .item{
 .next-month{
   text-align: right;
 }
+
+.item{
+  position: relative;
+  width:70%;
+  background-color: var(--themeColor);
+  text-align: center;
+  overflow: auto;
+  box-sizing: border-box;
+  border: solid 1px rgba(255, 255, 255, 0.4);
+  border-radius: 5%;
+}
+
+
+
 
 @import "../node_modules/bulma/bulma.sass";
 
