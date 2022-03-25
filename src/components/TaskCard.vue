@@ -11,7 +11,7 @@ defineProps({
     
         <foreignObject x="12.5%" :y="svgY(item)" width="40%" :height="svgHeight(item)" class="box item" @click="changeCommon(item.members)">
             <div>{{item.title}}</div>
-            <div class="timer-item">{{ item["start-time"] }} {{ item["end-time"] }}</div>
+            <div class="timer-item">{{ item["start-time"] }} - {{ item["end-time"] }}</div>
             <div class="breadcrumb has-dot-separator">
                 
                 <ul>

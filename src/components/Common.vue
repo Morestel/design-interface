@@ -2,7 +2,7 @@
     <div class="common-block">
         <div class="card">
             <header class="card-header">
-                <p class="card-header-title">In common</p>
+                <p class="card-header-title is-size-4">In common</p>
             </header>
             <div class="card-content">
                 <div class="content">
