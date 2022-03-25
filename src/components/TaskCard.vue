@@ -33,10 +33,6 @@ export default{
 
     emits:['changeCommon'],
 
-    mounted(){
-        console.log(this.item)
-    },
-
     methods:{
 
         svgY: function (item) { // In function of the start of the item

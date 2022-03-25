@@ -78,7 +78,6 @@ export default{
             switch(type){
                 case "day":
                     this.date.setDate(toChange);
-                    console.log(this.date.getDate())
                     break;
                 case "month":
                     var month = ''
