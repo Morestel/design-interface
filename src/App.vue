@@ -14,7 +14,7 @@ import TaskCard from './components/TaskCard.vue';
     
   <main>
     <MonthDateVue @changeDate="changeDate($event)" />
-    <svg id="svgBlock" width="100%" height="1500px">
+    <svg id="svgBlock" width="100%" height="1440px">
 
       <foreignObject v-for="h in hours" :key="h.t" v-bind:x="h.x" v-bind:y="h.y" v-bind:width="h.w" v-bind:height="h.h" class="hour">
             <div>{{h.t}}</div>
@@ -95,6 +95,7 @@ export default{
             }
           }
         },
+
     }
 }
 
@@ -112,9 +113,14 @@ $background-selected: #6caaaa;
 
 $primary:$purple;
 
+$body-background-color: $background-color;
+$body-color: #E7E8F2;
+
 :root {
   --themeColor: $background-selected;
 }
+
+$box-background-color: var(--themeColor);
 
 * {
   margin: 0px;
@@ -122,20 +128,16 @@ $primary:$purple;
 }
 
 html {
-  scroll-behavior: smooth;
-  min-width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  color: white;
+  overflow-x:hidden;
 }
 
 body{
-  margin: 0;
-  background-color: $background-color;
+
 }
 
 header{
-  height:150px;
+  width: 100%;
+  height:20%;
 }
 
 main{
@@ -149,11 +151,10 @@ main{
 }
 
 .avatar {
-  position: absolute;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   top: 10px;
+  transition : opacity 0.5s;
 }
 
 .avatar:hover {
@@ -166,7 +167,7 @@ main{
 }
 
 .selected-month{
-  color:var(--themeColor);
+  color:var(--themeColor) !important;
 }
 
 svg .hour div {
@@ -191,12 +192,23 @@ svg .item{
   border-radius: 5%;
 }
 
-svg .item:hover {
-  background-color: blue;
+.month-date{
+  margin-top:1%;
 }
 
-svg .item{
-  border: 1px solid red;
+.actual-month, .previous-month, .next-month{
+  user-select: none;
+  display: inline-block;
+  width:30%;
+  height:5%;
+}
+
+.previous-month{
+  text-align: left;
+}
+
+.next-month{
+  text-align: right;
 }
 
 @import "../node_modules/bulma/bulma.sass";

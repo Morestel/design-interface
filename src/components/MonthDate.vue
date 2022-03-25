@@ -1,13 +1,18 @@
 <template>
 <div class="block">
     <div class="block has-text-centered">
-        <div><span @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> <span class="content is-medium selected-month">{{ month }}</span> <span  @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span></div>
-        <div class="select is-small is-rounded selected-year">
+        <div class="month-date">
+            <span class="previous-month" @click="changeDate(previousMonth, 'month')">{{ previousMonth }}</span> 
+            <span class="content is-medium selected-month actual-month">{{ month }}</span> 
+            <span class="next-month" @click="changeDate(nextMonth, 'month')">{{ nextMonth }}</span>
+        </div>
+        <div class="select is-small is-rounded">
             <select v-model="year" class="is-hovered" @click="changeDate($event, 'year')">
                 <option v-for="y in years" :key="y">{{ y }}</option>
             </select>
         </div>
     </div>
+
 
     <div class="tabs is-centered">
         <ul>
